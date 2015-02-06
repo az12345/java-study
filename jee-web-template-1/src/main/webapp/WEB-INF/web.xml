@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"
+    version="2.4">
+    
+  	<display-name>Webtasks demo application</display-name>
+  	
+  	<context-param>
+		<param-name>developer</param-name>
+		<param-value>nedis</param-value>
+	</context-param>
+	
+  	<!-- Listeners -->
+  	<listener>
+		<listener-class>nedis.demo.webtasks.listeners.WebtasksContextListener</listener-class>
+	</listener>
+	
+  	<listener>
+		<listener-class>nedis.demo.webtasks.listeners.WebtasksSessionAttributesListener</listener-class>
+	</listener>
+
+  	<listener>
+		<listener-class>nedis.demo.webtasks.listeners.WebtasksSessionListener</listener-class>
+	</listener>
+
+  	<!-- Servlets -->
+	<servlet>
+		<servlet-name>LoginServletHandler</servlet-name>
+		<servlet-class>nedis.demo.webtasks.actions.LoginServletHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServletHandler</servlet-name>
+		<url-pattern>/login.php</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LogoutServletHandler</servlet-name>
+		<servlet-class>nedis.demo.webtasks.actions.LogoutServletHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutServletHandler</servlet-name>
+		<url-pattern>/logout.php</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ErrorServletHandler</servlet-name>
+		<servlet-class>nedis.demo.webtasks.actions.ErrorServletHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ErrorServletHandler</servlet-name>
+		<url-pattern>/error.php</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ErrorServletHandler</servlet-name>
+		<url-pattern>/pageNotFound.php</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AdminHomeServletHandler</servlet-name>
+		<servlet-class>nedis.demo.webtasks.actions.admin.AdminHomeServletHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminHomeServletHandler</servlet-name>
+		<url-pattern>/admin/home.php</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UserHomeServletHandler</servlet-name>
+		<servlet-class>nedis.demo.webtasks.actions.user.UserHomeServletHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserHomeServletHandler</servlet-name>
+		<url-pattern>/user/home.php</url-pattern>
+	</servlet-mapping>
+
+	<!-- Filters -->
+	<filter>
+  		<filter-name>WebtasksCharsetFilter</filter-name>
+  		<filter-class>nedis.demo.webtasks.filters.WebtasksCharsetFilter</filter-class>
+	</filter>
+	<filter-mapping>
+  		<filter-name>WebtasksCharsetFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+  		<filter-name>TestDemoFilter</filter-name>
+  		<filter-class>nedis.demo.webtasks.filters.TestDemoFilter</filter-class>
+	</filter>
+	<filter-mapping>
+  		<filter-name>TestDemoFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<error-page>
+    	<error-code>404</error-code>
+    	<location>/pageNotFound.php</location>
+	</error-page> 
+	
+	<error-page>
+    	<error-code>500</error-code>
+    	<location>/error.php</location>
+	</error-page> 
+	
+	<error-page>
+    	<exception-type>java.lang.Exception</exception-type>
+    	<location>/error.php</location>
+	</error-page> 
+	
+	<session-config>
+        <session-timeout>30</session-timeout>
+	</session-config>
+	
+	<welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+	
+</web-app>
